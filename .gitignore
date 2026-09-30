@@ -219,3 +219,4 @@ __marimo__/
 
 *.pdf
 *.zip
+test_mongo_db.py
