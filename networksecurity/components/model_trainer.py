@@ -32,7 +32,8 @@ from sklearn.ensemble import (
 )
 
 import mlflow
-
+import dagshub
+dagshub.init(repo_owner='pervnandal', repo_name='Network-security', mlflow=True)
 
 class ModelTrainer:
     def __init__(
@@ -58,10 +59,8 @@ class ModelTrainer:
             mlflow.sklearn.log_model(
                 sk_model=best_model,
                 name="model",
-                
+                skops_trusted_types=["sklearn.tree._tree.Tree"]
             )
-            
-            
             
 
     def train_model(self, x_train, y_train, x_test, y_test):
@@ -142,6 +141,9 @@ class ModelTrainer:
         save_object(
             self.model_trainer_config.trained_model_file_path, obj=Network_Model
         )
+        
+        # Model Pusher
+        save_object("final_models/model.pkl",best_model)
 
         # Model Trainer Artifact
         model_trainer_artifact = ModelTrainerArtifact(

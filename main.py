@@ -52,12 +52,13 @@ if __name__ == "__main__":
             model_trainer_config=model_trainer_config,
             data_transformation_artifact=data_transformation_artifact,
         )
-        logger.info("Initiate Data Transformation")
+        logger.info("Initiate Model Trainer")
         model_trainer_artifact = (
             model_trainer.initiate_model_trainer()
         )
-        logger.info("Data Transformation Completed")
-        print(data_transformation_artifact)
+        logger.info("Model Training Completed")
+        print(model_trainer_artifact)
 
     except Exception as e:
         raise NetworkSecurityException(e, sys)
+    
